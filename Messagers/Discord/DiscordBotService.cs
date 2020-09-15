@@ -8,6 +8,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -156,7 +157,21 @@ namespace BeatSlayerServer.Services.Messaging.Discord
         }
 
 
+        public async Task<string[]> GetMultiplayerEventResults()
+        {
+            WebClient c = new WebClient();
 
+            string response = await c.DownloadStringTaskAsync(settings.Host.ServerUrl + "/Event/GetMultiplayerEventResults");
+
+            return response.Split('\n');
+        }
+        public async Task<DateTime[]> GetStartAndEndEventTimes()
+        {
+            WebClient c = new WebClient();
+            string response = await c.DownloadStringTaskAsync(settings.Host.ServerUrl + "/Event/GetStartAndEndEventTimes");
+
+            return JsonConvert.DeserializeObject<DateTime[]>(response);
+        }
 
 
 
@@ -189,6 +204,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             commandsModule.RegisterCommands<BasicCommands>();
             commandsModule.RegisterCommands<ReportCommands>();
             commandsModule.RegisterCommands<MapsCommands>();
+            commandsModule.RegisterCommands<EventCommands>();
 
             client.MessageCreated += CheckAnotherPrefixes;
             client.MessageCreated += SudoPing;
@@ -204,7 +220,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             await client.UpdateStatusAsync(new DiscordGame(">play Beat Slayer"));
 
 
-            await Task.Delay(1500);
+            await Task.Delay(10000);
 
             ModeratorRole = ModerationChannel.Guild.GetRole(settings.Bot.Discord_ModerationRoleId).Mention;
         }

@@ -1,7 +1,7 @@
 {
   "Host": {
     "StartUrl": "https://localhost:4020",
-    "ServerUrl": "https://localhost:5020",
+    "ServerUrl": "https://localhost:5011",
     "AllowedIps": [
       "93.100.163.28"
     ]

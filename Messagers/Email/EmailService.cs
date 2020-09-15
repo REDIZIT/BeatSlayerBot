@@ -28,30 +28,30 @@ namespace BeatSlayerServer.Utils.Email
         }
         public void Build()
         {
-            string fromEmail = "redizitgamestudios@gmail.com";
-            string fromPassword = "GR0155YXZ9";
+            //string fromEmail = "redizitgamestudios@gmail.com";
+            //string fromPassword = "";
 
-            //client = new SmtpClient("smtp.gmail.com", 587)
-            //{
-            //    Credentials = new NetworkCredential(fromEmail, fromPassword),
-            //    EnableSsl = true
-            //};
+            ////client = new SmtpClient("smtp.gmail.com", 587)
+            ////{
+            ////    Credentials = new NetworkCredential(fromEmail, fromPassword),
+            ////    EnableSsl = true
+            ////};
 
-            MailMessage mail = new MailMessage();
-            //mail.From = new MailAddress("iv24032004@yandex.ru"); // Адрес отправителя
-            mail.From = new MailAddress(fromEmail);
-            mail.To.Add(new MailAddress("iv24032004@gmail.com")); // Адрес получателя
-            mail.Subject = "Заголовок";
-            mail.Body = "Письмо.....";
+            //MailMessage mail = new MailMessage();
+            ////mail.From = new MailAddress("iv24032004@yandex.ru"); // Адрес отправителя
+            //mail.From = new MailAddress(fromEmail);
+            //mail.To.Add(new MailAddress("iv24032004@gmail.com")); // Адрес получателя
+            //mail.Subject = "Заголовок";
+            //mail.Body = "Письмо.....";
 
-            client = new SmtpClient();
-            //client.Host = "smtp.yandex.ru";
-            client.Host = "smtp.gmail.com";
-            client.Port = 587;
-            client.EnableSsl = true;
-            //client.Credentials = new NetworkCredential("iv24032004@yandex.ru", "GR0155yxz0"); // Ваши логин и пароль
-            client.Credentials = new NetworkCredential(fromEmail, fromPassword); // Ваши логин и пароль
-            client.Send(mail);
+            //client = new SmtpClient();
+            ////client.Host = "smtp.yandex.ru";
+            //client.Host = "smtp.gmail.com";
+            //client.Port = 587;
+            //client.EnableSsl = true;
+            ////client.Credentials = new NetworkCredential("iv24032004@yandex.ru", "GR0155yxz0"); // Ваши логин и пароль
+            //client.Credentials = new NetworkCredential(fromEmail, fromPassword); // Ваши логин и пароль
+            //client.Send(mail);
         }
         public void Kill()
         {
