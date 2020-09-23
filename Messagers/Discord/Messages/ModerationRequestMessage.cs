@@ -5,7 +5,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 {
     public class ModerationRequestMessage : IDiscordMessage
     {
-        public string Message => $"{ModeratorRole}\n:robot: Player want to approve his map";
+        public string Message => ModeratorRole;
         public DiscordColor Color => new DiscordColor(0, 180, 255);
         public bool IsPublic => false;
 
@@ -27,6 +27,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 
         public DiscordEmbedBuilder ApplyFields(DiscordEmbedBuilder builder)
         {
+            builder.Description = $":robot: Player want to approve his map";
             builder.AddField("Map", Trackname);
             builder.AddField("Mapper", Mapper);
 

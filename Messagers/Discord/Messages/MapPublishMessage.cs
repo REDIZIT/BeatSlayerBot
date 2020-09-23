@@ -5,7 +5,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 {
     public class MapPublishMessage : IDiscordMessage
     {
-        public string Message => ":relaxed: New map published";
+        public string Message => "";
         public DiscordColor Color => new DiscordColor(0, 255, 128);
         public bool IsPublic => true;
 
@@ -21,6 +21,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 
         public DiscordEmbedBuilder ApplyFields(DiscordEmbedBuilder builder)
         {
+            builder.Description = ":relaxed: New map published";
             builder.AddField("Map", Trackname);
             builder.AddField("Mapper", Mapper, true);
 

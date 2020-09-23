@@ -39,7 +39,8 @@ namespace BeatSlayerBot.Messagers.Discord.Commands
             {
                 b.AppendLine(":white_check_mark: Event completed :white_check_mark: ");
             }
-            b.AppendLine("\n:small_orange_diamond: Play in multiplayer and get 1 score for each game\n\nNickname          Games count");
+            b.AppendLine("\n:small_orange_diamond: You can only take part if you have less than 50k RP");
+            b.AppendLine(":small_orange_diamond: Play in multiplayer and get 1 score for each game\n\nNickname          Games count");
 
 
 

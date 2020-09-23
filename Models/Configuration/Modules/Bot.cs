@@ -13,6 +13,7 @@
 
         public ulong Discord_ModerationChannelId { get; set; } = 701781287064698961;
         public ulong Discord_PublicChannelId { get; set; } = 702088186779664425;
+        public ulong Discord_ScoreChannelId { get; set; } = 756957288014676039;
         public ulong Discord_ModerationRoleId { get; set; } = 694150045854990417;
         public ulong Discord_DeveloperRoleId { get; set; } = 692845394257903637;
 

@@ -5,7 +5,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 {
     public class MapRejectMessage : IDiscordMessage
     {
-        public string Message => ":robot: Map was rejected";
+        public string Message => "";
         public DiscordColor Color => new DiscordColor(255, 0, 0);
         public bool IsPublic => false;
 
@@ -25,6 +25,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 
         public DiscordEmbedBuilder ApplyFields(DiscordEmbedBuilder builder)
         {
+            builder.Description = ":robot: Map was rejected";
             builder.AddField("Map", Trackname, true);
             builder.AddField("Mapper", Mapper, true);
             builder.AddField("Comment", Comment + " -**" + Moderator + "**");

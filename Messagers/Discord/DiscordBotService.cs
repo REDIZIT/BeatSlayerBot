@@ -29,6 +29,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
         public DiscordClient client;
         private DiscordChannel ModerationChannel { get; set; }
         private DiscordChannel PublicChannel { get; set; }
+        private DiscordChannel ScoreChannel { get; set; }
 
         private string ModeratorRole { get; set; }
 
@@ -110,7 +111,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             DiscordEmbed embed = message.ApplyFields(builder).Build();
 
 
-
             // Send this message to channel, where only moderators live
             await client.SendMessageAsync(ModerationChannel, message.Message, false, embed);
 
@@ -148,6 +148,26 @@ namespace BeatSlayerServer.Services.Messaging.Discord
         {
             MapRejectMessage msg = new MapRejectMessage(trackname, mapper, moderator, comment);
             await SendMessage(msg);
+        }
+        public async Task SendScoreMessage(string nick, string grade, string trackname, string mods, string accuracy, string rp)
+        {
+            // [player name] got [rank] [Map+mods] [accuracy%] [Number of RP]
+            if (grade == "A" || grade == "S" || grade == "SS")
+            {
+                if (grade == "S") grade = "S :+1:";
+                else if (grade == "SS") grade = "  :tada:  SS  :tada:  ";
+
+                string mapString = trackname;
+                if (!string.IsNullOrWhiteSpace(mods) && mods != "None")
+                {
+                    mapString += " + " + mods;
+                }
+
+                string rpString = "";
+                if (rp != "0") rpString = $" and {rp} RP";
+
+                await client.SendMessageAsync(ScoreChannel, $"**{nick}** got **{grade}** on `{mapString}` with {accuracy}%" + rpString);
+            }
         }
 
         public async Task<string> GetRandomGroup()
@@ -187,9 +207,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord
                 TokenType = TokenType.Bot,
             });
 
-            Console.WriteLine("Build bot");
-
-
             // Provide commands and their configuration
             CommandsNextConfiguration conf = new CommandsNextConfiguration()
             {
@@ -216,6 +233,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             // Get channels where bot will spam
             ModerationChannel = await client.GetChannelAsync(settings.Bot.Discord_ModerationChannelId);
             PublicChannel = await client.GetChannelAsync(settings.Bot.Discord_PublicChannelId);
+            ScoreChannel = await client.GetChannelAsync(settings.Bot.Discord_ScoreChannelId);
 
             await client.UpdateStatusAsync(new DiscordGame(">play Beat Slayer"));
 

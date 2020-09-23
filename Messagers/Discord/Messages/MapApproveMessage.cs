@@ -5,7 +5,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 {
     public class MapApproveMessage : IDiscordMessage
     {
-        public string Message => ":robot: Map was approved";
+        public string Message => "";
         public DiscordColor Color => new DiscordColor(0, 220, 0);
         public bool IsPublic => true;
 
@@ -25,6 +25,7 @@ namespace BeatSlayerServer.Models.Messaging.Discord
 
         public DiscordEmbedBuilder ApplyFields(DiscordEmbedBuilder builder)
         {
+            builder.Description = ":robot: Map was approved";
             builder.AddField("Map", Trackname, true);
             builder.AddField("Mapper", Mapper, true);
             builder.AddField("Comment", Comment + " -**" + Moderator + "**");

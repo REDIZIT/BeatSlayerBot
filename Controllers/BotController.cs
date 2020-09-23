@@ -130,6 +130,11 @@ namespace BeatSlayerBot.Controllers
         {
             await vkBot.CoinsSyncLimit(nick, coins);
         }
+        public async Task SendScore(string nick, string grade, string trackname, string mods, string accuracy, string rp)
+        {
+            // [player name] got [rank] [Map+mods] [accuracy%] [Number of RP]
+            await dsBot.SendScoreMessage(nick, grade, trackname, mods, accuracy, rp);
+        }
 
 
 
