@@ -154,8 +154,14 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             // [player name] got [rank] [Map+mods] [accuracy%] [Number of RP]
             if (grade == "A" || grade == "S" || grade == "SS")
             {
-                if (grade == "S") grade = "S :+1:";
-                else if (grade == "SS") grade = "  :tada:  SS  :tada:  ";
+                string gradeString = "";
+                switch (grade)
+                {
+                    case "A": gradeString = "A"; break;
+                    case "S": gradeString = "S :+1:"; break;
+                    case "SS": gradeString = "  :tada:  SS  :tada:  "; break;
+                }
+
 
                 string mapString = trackname;
                 if (!string.IsNullOrWhiteSpace(mods) && mods != "None")
@@ -166,7 +172,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
                 string rpString = "";
                 if (rp != "0") rpString = $" and {rp} RP";
 
-                await client.SendMessageAsync(ScoreChannel, $"**{nick}** got **{grade}** on `{mapString}` with {accuracy}%" + rpString);
+                await client.SendMessageAsync(ScoreChannel, $"**{nick}** got **{gradeString}** on `{mapString}` with {accuracy}%" + rpString);
             }
         }
 
