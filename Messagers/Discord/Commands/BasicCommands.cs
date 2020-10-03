@@ -2,8 +2,6 @@
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
 
 namespace BeatSlayerServer.Services.Messaging.Discord.Commands
@@ -32,7 +30,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             builder.AddField("Environment", $"Service");
             builder.AddField("Version", settings.Bot.Version);
             builder.AddField("Build source", "GitHub automated build");
-            builder.AddField("Кто ты", "ты крут");
 
             await ctx.Channel.SendMessageAsync("Hello guys", embed: builder.Build()).ConfigureAwait(false);
         }
