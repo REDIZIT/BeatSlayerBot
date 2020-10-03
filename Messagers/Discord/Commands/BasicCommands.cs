@@ -23,8 +23,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Command("ping")]
         public async Task Ping(CommandContext ctx)
         {
-            Console.WriteLine("Pinged!!!");
-
             if (!discordBot.IsBotEnabled) return;
 
             var builder = new DiscordEmbedBuilder()
@@ -33,7 +31,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             };
             builder.AddField("Environment", $"Service");
             builder.AddField("Version", settings.Bot.Version);
-            builder.AddField("Code Source", "Automated build");
+            builder.AddField("Build source", "GitHub automated build");
 
             await ctx.Channel.SendMessageAsync("Hello guys", embed: builder.Build()).ConfigureAwait(false);
         }
