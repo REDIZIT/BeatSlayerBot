@@ -11,9 +11,9 @@ jobs:
     
     steps:
       - name: Execute SSH commmands on remote server
-        uses: JimCronqvist/action-ssh@master
+        uses: garygrossgarten/github-action-ssh@release
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: whoami
+          command: whoami
