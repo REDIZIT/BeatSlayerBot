@@ -16,7 +16,7 @@ jobs:
         with:
           dotnet-version: 3.1.301
       - name: ls -a via ssh
-        uses: REDIZIT/BeatSlayerBot@master
+        uses: actions/checkout@v2
         with:
           command: ls -a
           host: ${{ secrets.HOST }}
