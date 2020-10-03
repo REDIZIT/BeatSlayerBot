@@ -10,13 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 3.1.301
-      - name: ls -a via ssh
-        uses: actions/checkout@v2
+      - name: Execute SSH commmands on remote server
+        uses: JimCronqvist/action-ssh@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
