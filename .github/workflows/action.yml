@@ -18,7 +18,7 @@ jobs:
       - name: ls -a via ssh
         uses: actions/checkout@v2
         with:
-          command: ls -a
           host: ${{ secrets.HOST }}
-          user: ${{ secrets.SSH_USER }}
-          pass: ${{ secrets.SSH_PASSWORD }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: whoami
