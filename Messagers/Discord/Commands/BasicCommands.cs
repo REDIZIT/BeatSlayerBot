@@ -33,6 +33,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             };
             builder.AddField("Environment", $"Service");
             builder.AddField("Version", settings.Bot.Version);
+            builder.AddField("Code Source", "Automated build");
 
             await ctx.Channel.SendMessageAsync("Hello guys", embed: builder.Build()).ConfigureAwait(false);
         }
