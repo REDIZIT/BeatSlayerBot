@@ -23,7 +23,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Command("ping")]
         public async Task Ping(CommandContext ctx)
         {
-            Console.WriteLine("Pinged!!");
+            Console.WriteLine("Pinged!!!");
 
             if (!discordBot.IsBotEnabled) return;
 

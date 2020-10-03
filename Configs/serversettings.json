@@ -1,7 +1,7 @@
 {
   "Host": {
-    "StartUrl": "https://localhost:4020",
-    "ServerUrl": "https://localhost:5011",
+    "StartUrl": "http://localhost:4020",
+    "ServerUrl": "http://localhost:5001",
     "AllowedIps": [
       "93.100.163.28"
     ]
@@ -15,10 +15,11 @@
 
     "IsDiscordBotEnabled": true,
     "Discord_Token": "NzI5MDE4MDEwNDI1MDk4MjYw.XwC-SA.T4YX8ATXSgGEDy4xSi0CvJpUIPM",
-    "Version": "1.0.3",
+    "Version": "1.1.1",
 
     "Discord_ModerationChannelId": 701781287064698961,
     "Discord_PublicChannelId": 702088186779664425,
+    "Discord_ScoreChannelId": 756957288014676039,
     "Discord_ModerationRoleId": 694150045854990417,
     "Discord_DeveloperRoleId": 692845394257903637,
     "Discord_OtherPrefixes": [ "!" ],
@@ -28,11 +29,11 @@
       729017598473404499, // bot-tests
       728997055800016928 // live
     ],
-    "Discord_SuggestionChannelId": 729017598473404499,
+    "Discord_SuggestionChannelId": 712670369479393301,
     "Discord_BugsChannelId": 729017598473404499
   },
   "Email": {
-    "IsEnabled": false,
+    "IsEnabled": true,
     "Login": "redizitgamestudios@gmail.com",
     "Password": "GR0155YXZ9",
     "Template_Code": "wwwroot/templates/mail-code-template.html",
