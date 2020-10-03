@@ -16,4 +16,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
-          command: systemctl stop bsbot
+          command: | 
+            cd /source/BeatSlayerBot
+            git pull
+            dotnet publish -c release -o ../BeatSlayerBot-Build
+            systemctl restart bsbot
