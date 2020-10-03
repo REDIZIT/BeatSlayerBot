@@ -1,0 +1,23 @@
+name: .NET Core
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Execute SSH commmands on remote server
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          command: | 
+            cd /source/BeatSlayerBot
+            git pull
+            dotnet publish -c release -o ../BeatSlayerBot-Build
+            systemctl restart bsbot
