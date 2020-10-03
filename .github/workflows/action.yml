@@ -10,10 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: ls -a via ssh
-      uses: REDIZIT/BeatSlayerBot@master
-      with:
-        command: ls -a
-        host: ${{ secrets.HOST }}
-        username: ${{ secrets.SSH_USER }}
-        password: ${{ secrets.SSH_PASSWORD }}
+      - uses: actions/checkout@v2
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 3.1.301
