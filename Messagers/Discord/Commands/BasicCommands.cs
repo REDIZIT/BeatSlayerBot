@@ -29,7 +29,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             };
             builder.AddField("Environment", $"Service");
             builder.AddField("Version", settings.Bot.Version);
-            builder.AddField("Build source", "GitHub automated build");
 
             await ctx.Channel.SendMessageAsync("Hello guys", embed: builder.Build()).ConfigureAwait(false);
         }

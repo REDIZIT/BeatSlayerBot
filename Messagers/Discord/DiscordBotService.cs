@@ -227,7 +227,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             commandsModule.RegisterCommands<BasicCommands>();
             commandsModule.RegisterCommands<ReportCommands>();
             commandsModule.RegisterCommands<MapsCommands>();
-            commandsModule.RegisterCommands<EventCommands>();
+            //commandsModule.RegisterCommands<EventCommands>();
 
             client.MessageCreated += CheckAnotherPrefixes;
             client.MessageCreated += SudoPing;
