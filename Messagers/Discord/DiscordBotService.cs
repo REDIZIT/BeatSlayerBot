@@ -166,7 +166,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
                 string mapString = trackname;
                 if (!string.IsNullOrWhiteSpace(mods) && mods != "None")
                 {
-                    mapString += " + " + mods;
+                    mapString += "` + `" + mods;
                 }
 
                 string rpString = "";

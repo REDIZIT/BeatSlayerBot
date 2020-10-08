@@ -28,7 +28,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
                 Color = new DiscordColor(32, 32, 32)
             };
             builder.AddField("Environment", $"Service");
-            builder.AddField("Version", settings.Bot.Version);
+            builder.AddField("Version", "1.1.1 (build 0)");
 
             await ctx.Channel.SendMessageAsync("Hello guys", embed: builder.Build()).ConfigureAwait(false);
         }

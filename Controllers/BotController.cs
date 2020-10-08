@@ -22,7 +22,7 @@ namespace BeatSlayerBot.Controllers
 
         public IActionResult Index()
         {
-            return Content("I'm Messager Microservice :D");
+            return Content("I'm Messager :D");
         }
         public IActionResult Status()
         {
