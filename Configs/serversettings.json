@@ -27,7 +27,8 @@
       712668634602012742, // memes
       712668634602012742, // bots
       729017598473404499, // bot-tests
-      728997055800016928 // live
+      728997055800016928, // live
+      701781434788216855, // moderation chat
     ],
     "Discord_SuggestionChannelId": 712670369479393301,
     "Discord_BugsChannelId": 729017598473404499
