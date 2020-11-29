@@ -15,7 +15,7 @@
 
     "IsDiscordBotEnabled": true,
     "Discord_Token": "NzI5MDE4MDEwNDI1MDk4MjYw.XwC-SA.T4YX8ATXSgGEDy4xSi0CvJpUIPM",
-    "Version": "1.1.1",
+    "Version": "1.1.1.1",
 
     "Discord_ModerationChannelId": 701781287064698961,
     "Discord_PublicChannelId": 702088186779664425,
@@ -29,7 +29,9 @@
       729017598473404499, // bot-tests
       728997055800016928, // live
       701781434788216855, // moderation chat
-      774939556453679124  // spam
+      774939556453679124, // spam
+      774939605899542532, // bot-game 1
+      774939631388852247  // bot-game 2
     ],
     "Discord_SuggestionChannelId": 712670369479393301,
     "Discord_BugsChannelId": 729017598473404499
