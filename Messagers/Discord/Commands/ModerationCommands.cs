@@ -34,7 +34,15 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             List<ModerateOperation> ls = JsonConvert.DeserializeObject<List<ModerateOperation>>(json);
 
             await msg.DeleteAsync();
-            await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
+
+            try
+            {
+                await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
+            }
+            catch (Exception err)
+            {
+                await ctx.RespondAsync("Exception: " + err);
+            }
         }
     }
 
