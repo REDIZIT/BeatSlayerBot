@@ -18,11 +18,11 @@ namespace BeatSlayerServer.Models.Messaging.Discord
         public string ModeratorRole { get; }
 
 
-        public ModerationRequestMessage(string trackname, string mapper, string moderatorRole)
+        public ModerationRequestMessage(string trackname, string mapper, DiscordRole moderatorRole)
         {
             Trackname = trackname;
             Mapper = mapper;
-            ModeratorRole = moderatorRole;
+            ModeratorRole = moderatorRole.Mention;
         }
 
         public DiscordEmbedBuilder ApplyFields(DiscordEmbedBuilder builder)

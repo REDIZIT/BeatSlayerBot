@@ -47,7 +47,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Description("Approve map")]
         public async Task ApproveMap(CommandContext ctx, [Description("Song name (syntax is Author-Name)")] string trackname, [Description("Player nick, who created map")] string mapper, [Description("Comment")] string comment)
         {
-            if (ctx.Member.Roles.Any(r => r.Mention == bot.ModeratorRole) == false)
+            if (ctx.Member.Roles.Any(r => r.Name == bot.ModeratorRole.Name) == false)
             {
                 await ctx.RespondAsync("You're not moderator");
                 return;

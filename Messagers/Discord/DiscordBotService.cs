@@ -31,7 +31,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
         private DiscordChannel PublicChannel { get; set; }
         private DiscordChannel ScoreChannel { get; set; }
 
-        public string ModeratorRole { get; set; }
+        public DiscordRole ModeratorRole;
 
 
         public readonly IHostEnvironment env;
@@ -247,7 +247,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
 
             await Task.Delay(10000);
 
-            ModeratorRole = ModerationChannel.Guild.GetRole(settings.Bot.Discord_ModerationRoleId).Mention;
+            ModeratorRole = ModerationChannel.Guild.GetRole(settings.Bot.Discord_ModerationRoleId);
         }
         private async Task SetStatus(string status)
         {
