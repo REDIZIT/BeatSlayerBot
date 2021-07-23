@@ -24,7 +24,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
 
         [Command("maps-to-approve")]
         [Description("Get full list of maps to requested to approve")]
-        public async Task GetRandomGroup(CommandContext ctx)
+        public async Task GetMapsToApprove(CommandContext ctx)
         {
             WebClient c = new WebClient();
 
@@ -35,9 +35,10 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
 
             await msg.DeleteAsync();
 
+            await ctx.RespondAsync("Maps to approve count " + ls.Count);
             try
             {
-                await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
+                await ctx.RespondAsync(string.Join("\n", ls.Select(o => o.trackname)));
             }
             catch (Exception err)
             {
