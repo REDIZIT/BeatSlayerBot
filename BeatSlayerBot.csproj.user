@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Docker</ActiveDebugProfile>
+    <ActiveDebugProfile>BeatSlayerBot</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>registry.hub.docker.com_redizit_beatslayerbot</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>

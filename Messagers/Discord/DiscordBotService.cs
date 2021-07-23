@@ -227,6 +227,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
             commandsModule.RegisterCommands<BasicCommands>();
             commandsModule.RegisterCommands<ReportCommands>();
             commandsModule.RegisterCommands<MapsCommands>();
+            commandsModule.RegisterCommands<ModerationCommands>();
             //commandsModule.RegisterCommands<EventCommands>();
 
             client.MessageCreated += CheckAnotherPrefixes;
@@ -305,7 +306,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
                 };
                 builder.AddField("Environment", $"Service ({env.EnvironmentName})");
 
-                await e.Channel.SendMessageAsync("SUDO!! PING!!!", embed: builder.Build());
+                await e.Channel.SendMessageAsync("Pong! ", embed: builder.Build());
             }
         }
     }
