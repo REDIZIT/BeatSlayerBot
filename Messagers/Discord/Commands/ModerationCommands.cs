@@ -1,6 +1,7 @@
 ﻿using BeatSlayerServer.Models.Configuration;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -21,15 +22,18 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             bot = botService;
         }
 
-        [Command("maps_to_approve")]
+        [Command("maps-to-approve")]
         [Description("Get full list of maps to requested to approve")]
         public async Task GetRandomGroup(CommandContext ctx)
         {
             WebClient c = new WebClient();
 
+            DiscordMessage msg = await ctx.RespondAsync("loading...");
+
             string json = await c.DownloadStringTaskAsync(new Uri(settings.Host.ServerUrl + "/Moderation/GetOperations"));
             List<ModerateOperation> ls = JsonConvert.DeserializeObject<List<ModerateOperation>>(json);
 
+            await msg.DeleteAsync();
             await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
         }
     }
