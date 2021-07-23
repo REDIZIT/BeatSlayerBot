@@ -47,9 +47,6 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Description("Approve map")]
         public async Task ApproveMap(CommandContext ctx, [Description("Song name (syntax is Author-Name)")] string trackname, [Description("Player nick, who created map")] string mapper, [Description("Comment")] string comment)
         {
-            await ctx.RespondAsync("Member roles: " + string.Join(", ", ctx.Member.Roles.Select(r => r.Name)));
-            await ctx.RespondAsync("Moderator role: " + bot.ModeratorRole.Name);
-
             if (ctx.Member.Roles.All(r => r.Name != bot.ModeratorRole.Name))
             {
                 await ctx.RespondAsync("You're not moderator");
@@ -75,6 +72,36 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
 
             await msg.DeleteAsync();
             await ctx.RespondAsync("Approved");
+        }
+        [Command("reject")]
+        [Description("Reject map")]
+        public async Task RejectMap(CommandContext ctx, [Description("Song name (syntax is Author-Name)")] string trackname, [Description("Player nick, who created map")] string mapper, [Description("Comment")] string comment)
+        {
+            if (ctx.Member.Roles.All(r => r.Name != bot.ModeratorRole.Name))
+            {
+                await ctx.RespondAsync("You're not moderator");
+                return;
+            }
+
+
+            DiscordMessage msg = await ctx.RespondAsync("loading...");
+
+            ModerateOperation op = (await GetOperations()).FirstOrDefault(o => o.trackname == trackname && o.nick == mapper);
+            if (op == null)
+            {
+                await msg.DeleteAsync();
+                await ctx.RespondAsync("Map not found");
+                return;
+            }
+
+            op.moderatorNick = "[Discord] " + ctx.Member.DisplayName;
+            op.moderatorComment = comment;
+            op.state = ModerateOperation.State.Rejected;
+
+            await SendModerationResponse(op);
+
+            await msg.DeleteAsync();
+            await ctx.RespondAsync("Rejected");
         }
 
         private async Task<IEnumerable<ModerateOperation>> GetOperations()
