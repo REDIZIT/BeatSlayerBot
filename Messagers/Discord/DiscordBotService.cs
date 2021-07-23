@@ -31,7 +31,7 @@ namespace BeatSlayerServer.Services.Messaging.Discord
         private DiscordChannel PublicChannel { get; set; }
         private DiscordChannel ScoreChannel { get; set; }
 
-        private string ModeratorRole { get; set; }
+        public string ModeratorRole { get; set; }
 
 
         public readonly IHostEnvironment env;

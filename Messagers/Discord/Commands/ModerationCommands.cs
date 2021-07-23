@@ -26,17 +26,13 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Description("Get full list of maps to requested to approve")]
         public async Task GetMapsToApprove(CommandContext ctx)
         {
-            WebClient c = new WebClient();
-
             DiscordMessage msg = await ctx.RespondAsync("loading...");
 
-            string json = await c.DownloadStringTaskAsync(new Uri(settings.Host.ServerUrl + "/Moderation/GetOperations"));
-            List<ModerateOperation> ls = JsonConvert.DeserializeObject<List<ModerateOperation>>(json);
-            ls = ls.Where(o => o.state == ModerateOperation.State.Waiting).ToList();
+            var ls = await GetOperations();
 
             await msg.DeleteAsync();
 
-            await ctx.RespondAsync("Maps to approve count " + ls.Count);
+            await ctx.RespondAsync("Maps to approve count " + ls.Count());
             try
             {
                 await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
@@ -45,6 +41,51 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
             {
                 await ctx.RespondAsync("Exception: " + err);
             }
+        }
+
+        [Command("approve")]
+        [Description("Approve map")]
+        public async Task ApproveMap(CommandContext ctx, [Description("Song name (syntax is Author-Name)")] string trackname, [Description("Player nick, who created map")] string mapper, [Description("Comment")] string comment)
+        {
+            if (ctx.Member.Roles.Any(r => r.Mention == bot.ModeratorRole) == false)
+            {
+                await ctx.RespondAsync("You're not moderator");
+                return;
+            }
+
+
+            DiscordMessage msg = await ctx.RespondAsync("loading...");
+
+            ModerateOperation op = (await GetOperations()).FirstOrDefault(o => o.trackname == trackname && o.nick == mapper);
+            if (op == null)
+            {
+                await msg.DeleteAsync();
+                await ctx.RespondAsync("Map not found");
+                return;
+            }
+
+            op.moderatorNick = "[Discord] " + ctx.Member.DisplayName;
+            op.moderatorComment = comment;
+
+            await SendModerationResponse(op);
+        }
+
+        private async Task<IEnumerable<ModerateOperation>> GetOperations()
+        {
+            WebClient c = new WebClient();
+
+            string json = await c.DownloadStringTaskAsync(new Uri(settings.Host.ServerUrl + "/Moderation/GetOperations"));
+            List<ModerateOperation> ls = JsonConvert.DeserializeObject<List<ModerateOperation>>(json);
+
+            return ls.Where(o => o.state == ModerateOperation.State.Waiting).ToList();
+        }
+        private async Task SendModerationResponse(ModerateOperation op)
+        {
+            WebClient c = new WebClient();
+            string json = WebUtility.UrlEncode(JsonConvert.SerializeObject(op));
+            string url = string.Format(settings.Host.ServerUrl + "/Moderation/SendResponse?opJson={0}", json);
+
+            await c.DownloadStringTaskAsync(new Uri(url));
         }
     }
 
