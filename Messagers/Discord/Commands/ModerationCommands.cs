@@ -47,7 +47,10 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
         [Description("Approve map")]
         public async Task ApproveMap(CommandContext ctx, [Description("Song name (syntax is Author-Name)")] string trackname, [Description("Player nick, who created map")] string mapper, [Description("Comment")] string comment)
         {
-            if (ctx.Member.Roles.Any(r => r.Name == bot.ModeratorRole.Name) == false)
+            await ctx.RespondAsync("Member roles: " + string.Join(", ", ctx.Member.Roles.Select(r => r.Name)));
+            await ctx.RespondAsync("Moderator role: " + bot.ModeratorRole.Name);
+
+            if (ctx.Member.Roles.All(r => r.Name != bot.ModeratorRole.Name))
             {
                 await ctx.RespondAsync("You're not moderator");
                 return;
@@ -66,8 +69,12 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
 
             op.moderatorNick = "[Discord] " + ctx.Member.DisplayName;
             op.moderatorComment = comment;
+            op.state = ModerateOperation.State.Approved;
 
             await SendModerationResponse(op);
+
+            await msg.DeleteAsync();
+            await ctx.RespondAsync("Approved");
         }
 
         private async Task<IEnumerable<ModerateOperation>> GetOperations()
