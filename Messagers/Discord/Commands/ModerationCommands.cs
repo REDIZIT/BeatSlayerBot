@@ -32,13 +32,14 @@ namespace BeatSlayerServer.Services.Messaging.Discord.Commands
 
             string json = await c.DownloadStringTaskAsync(new Uri(settings.Host.ServerUrl + "/Moderation/GetOperations"));
             List<ModerateOperation> ls = JsonConvert.DeserializeObject<List<ModerateOperation>>(json);
+            ls = ls.Where(o => o.state == ModerateOperation.State.Waiting).ToList();
 
             await msg.DeleteAsync();
 
             await ctx.RespondAsync("Maps to approve count " + ls.Count);
             try
             {
-                await ctx.RespondAsync(string.Join("\n", ls.Select(o => o.trackname)));
+                await ctx.RespondAsync(string.Join("\n", ls.Select(o => "**" + o.trackname + "** by **" + o.nick + "**")));
             }
             catch (Exception err)
             {
